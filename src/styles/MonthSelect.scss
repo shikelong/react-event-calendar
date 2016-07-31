@@ -1,0 +1,18 @@
+.MonthSelect_Container {
+
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5em;
+  font-weight: 500;
+
+  & > .MonthSelect_Label {
+    display: inline-block;
+  }
+
+  & > .MonthSelect_Navigator {
+    display: inline-block;
+    width: 2em;
+    cursor: pointer;
+  }
+
+}
