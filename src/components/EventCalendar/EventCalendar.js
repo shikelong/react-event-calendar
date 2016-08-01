@@ -162,7 +162,7 @@ EventCalendar.defaultProps = {
   showHeader: true,
   showMonthSelect: true,
   layout: 'portrait',
-  width: 310
+  width: 318
 };
 
 

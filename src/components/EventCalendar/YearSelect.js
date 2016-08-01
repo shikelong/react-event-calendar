@@ -28,12 +28,22 @@ export default class YearSelect extends Component {
 
     let { selectedDate, minDate, maxDate } = this.props;
     // FIXME: style从外面传递进来并保证可用性
-    const height = 200, width = 300;
+    const height = 200, width = 318;
 
     const selectedYear = selectedDate.year(), minYear = minDate.year(), maxYear = maxDate.year(),
       thisYear = moment().year();
 
-    const rowHeight = 50, yearsCount = maxYear - minYear + 1;
+    const years = [];
+
+    for (let i = minYear; i <= maxYear; i++) {
+      years.push(i);
+    }
+
+    years.unshift(null);
+    years.push(null);
+
+
+    const rowHeight = 50, yearsCount = years.length;
     const containerHeight = (yearsCount * rowHeight < height + 50)
       ? yearsCount * rowHeight
       : height + 50;
@@ -45,26 +55,27 @@ export default class YearSelect extends Component {
           className={styles.YearSelect_list}
           width={width}
           height={containerHeight}
-          rowCount={maxYear - minYear + 1}
+          rowCount={yearsCount}
           rowHeight={rowHeight}
-          scrollToIndex={selectedYear - minYear}
+          scrollToIndex={1}
           scrollToAlignment={'center'}
           rowRenderer={({index}) => {
-            const renderYear = index + minYear;
-            let className= `${styles.YearSelect_Item}`;
-            if (renderYear === thisYear) {
-              className = `${className} ${styles.YearSelect_ThisYear}`;
-            }
-            if (renderYear === selectedYear) {
-              className = `${className} ${styles.YearSelect_SelectedYear}`;
-            }
-
-            return (<div
-              className={className}
-              onClick={this.handleSelectYear}
-              data-year={renderYear}
-              ><span>{renderYear}</span>
-            </div>);
+            return years[index];
+            // const renderYear = years[index];
+            // let className= `${styles.YearSelect_Item}`;
+            // if (renderYear === thisYear) {
+            //   className = `${className} ${styles.YearSelect_ThisYear}`;
+            // }
+            // if (renderYear === selectedYear) {
+            //   className = `${className} ${styles.YearSelect_SelectedYear}`;
+            // }
+            //
+            // return (<div
+            //   className={className}
+            //   onClick={this.handleSelectYear}
+            //   data-year={renderYear}
+            //   ><span>{renderYear}</span>
+            // </div>);
           }}
         />
       </div>
